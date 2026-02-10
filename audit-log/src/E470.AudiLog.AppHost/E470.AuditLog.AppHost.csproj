@@ -1,0 +1,18 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <UserSecretsId>2e820aa9-bc9e-49ac-92fc-8bd6d432da2d</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Aspire.Hosting.AppHost" />
+	  <PackageReference Include="Aspire.Hosting.SqlServer" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Web.Api\Web.Api.csproj" />
+  </ItemGroup>
+
+</Project>
