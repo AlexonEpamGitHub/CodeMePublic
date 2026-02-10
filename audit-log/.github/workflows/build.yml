@@ -22,13 +22,13 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore
-        run: dotnet restore AudiLog.sln
+        run: dotnet restore E470.AuditLog.sln
 
       - name: Build
-        run: dotnet build AudiLog.sln --configuration Release --no-restore
+        run: dotnet build E470.AuditLog.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test AudiLog.sln --configuration Release --no-restore --no-build
+        run: dotnet test E470.AuditLog.sln --configuration Release --no-restore --no-build
 
       - name: Publish
-        run: dotnet publish AudiLog.sln --configuration Release --no-restore --no-build
+        run: dotnet publish E470.AuditLog.sln --configuration Release --no-restore --no-build
