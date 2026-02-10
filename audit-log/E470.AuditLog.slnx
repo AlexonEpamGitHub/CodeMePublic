@@ -1,0 +1,28 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".cursorrules" />
+    <File Path=".dockerignore" />
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="docker/compose.mssql.yml" />
+    <File Path="docker/compose.webapi.override.yml" />
+    <File Path="docker/compose.webapi.yml" />
+    <File Path="docker/docker-compose.dcproj" />
+    <File Path="launchSettings.json" />
+    <File Path="test-coverage.bat" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/E470.AuditLog.Application/E470.AuditLog.Application.csproj" />
+    <Project Path="src/E470.AuditLog.AppHost/E470.AuditLog.AppHost.csproj" />
+    <Project Path="src/E470.AuditLog.ServiceDefaults/E470.AuditLog.ServiceDefaults.csproj" />
+    <Project Path="src/E470.AuditLog.Domain/E470.AuditLog.Domain.csproj" />
+    <Project Path="src/E470.AuditLog.EventBusClient/E470.AuditLog.EventBusClient.csproj" />
+    <Project Path="src/E470.AuditLog.Infrastructure/E470.AuditLog.Infrastructure.csproj" />
+    <Project Path="src/E470.AuditLog.SharedKernel/E470.AuditLog.SharedKernel.csproj" />
+    <Project Path="src/E470.AuditLog.Web.Api/E470.AuditLog.Web.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/E470.AuditLog.ArchitectureTests/E470.AuditLog.ArchitectureTests.csproj" />
+  </Folder>
+</Solution>
