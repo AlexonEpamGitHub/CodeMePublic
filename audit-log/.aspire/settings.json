@@ -1,3 +1,4 @@
 {
-  "appHostPath": "../src/AudiLog.AppHost/AuditLog.AppHost.csproj"
+  "appHostPath": "../src/E470.AudiLog.AppHost/E470.AuditLog.AppHost.csproj"
 }
+```
