@@ -1,0 +1,40 @@
+services:
+  e470-auditlog-web-api:
+    image: e470-auditlog-webapi
+    container_name: e470-auditlog-webapi
+    build:
+      context: ..
+      dockerfile: src/E470.AuditLog.Web.Api/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=sql-server;Database=E470AuditLogDb;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;
+    depends_on:
+      - sql-server
+    networks:
+      - e470-auditlog-network
+
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: e470-auditlog-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong@Passw0rd
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+      - e470-auditlog-network
+
+networks:
+  e470-auditlog-network:
+    driver: bridge
+
+volumes:
+  sqlserver-data:
