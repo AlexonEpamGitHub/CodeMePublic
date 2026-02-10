@@ -1,0 +1,46 @@
+<Project>
+	<PropertyGroup>
+		<!--If you want to target .NET 8, uncomment the below line and adjust the Directory.Packages.props file.
+	You will also need to update the Dockerfile to use .NET 8 instead of .NET 9 - both are in Web.Api project.-->
+		<!--<TargetFramework>net8.0</TargetFramework>-->
+
+		<TargetFramework>net10.0</TargetFramework>
+		<WarningsNotAsErrors>NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>
+		<ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<AnalysisLevel>latest</AnalysisLevel>
+		<AnalysisMode>All</AnalysisMode>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	</PropertyGroup>
+	<PropertyGroup>
+		<!-- Enable nullable reference types for all projects -->
+		<Nullable>enable</Nullable>
+
+		<!-- Treat warnings as errors in release builds -->
+		<TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+
+		<!-- StyleCop configuration -->
+		<EnableStyleCopAnalysis>true</EnableStyleCopAnalysis>
+		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+
+		<!-- Code analysis settings -->
+		<AnalysisLevel>latest</AnalysisLevel>
+		<AnalysisMode>Default</AnalysisMode>
+
+		<!-- Generate XML documentation for analysis -->
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+		<!-- Missing XML comment for publicly visible type or member -->
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
+		<PackageReference Include="SonarAnalyzer.CSharp">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+</Project>
