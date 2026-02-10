@@ -1,4 +1,4 @@
-# Clean Architecture Template
+# E470.AuditLog - Clean Architecture Template
 
 What's included in the template?
 
