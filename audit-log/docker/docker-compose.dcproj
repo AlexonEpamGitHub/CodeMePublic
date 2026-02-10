@@ -7,7 +7,7 @@
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>web.api</DockerServiceName>
-    <DockerComposeProjectName>audit-log</DockerComposeProjectName>
+    <DockerComposeProjectName>e470-audit-log</DockerComposeProjectName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="compose.mssql.yml" />
