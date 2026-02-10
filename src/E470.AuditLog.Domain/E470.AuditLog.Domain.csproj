@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\E470.AuditLog.SharedKernel\E470.AuditLog.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>
