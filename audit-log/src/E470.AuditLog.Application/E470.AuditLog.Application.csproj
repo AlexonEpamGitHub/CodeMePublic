@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Scrutor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\E470.AuditLog.Domain\E470.AuditLog.Domain.csproj" />
+    <ProjectReference Include="..\E470.AuditLog.EventBusClient\E470.AuditLog.EventBusClient.csproj" />
+    <ProjectReference Include="..\E470.AuditLog.SharedKernel\E470.AuditLog.SharedKernel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<InternalsVisibleTo Include="Application.UnitTests" />
+  </ItemGroup>
+
+</Project>
