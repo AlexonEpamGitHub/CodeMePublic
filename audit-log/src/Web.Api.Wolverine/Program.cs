@@ -3,10 +3,12 @@ using Infrastructure;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Web.Api.Wolverine.HealthChecks;
+using Web.Api.Wolverine.Integration;
+using Web.Api.Wolverine.Middleware;
 using Wolverine;
 using Wolverine.FluentValidation;
 using Wolverine.Http;
-using Web.Api.Wolverine.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,12 +31,16 @@ builder.Services.AddSwaggerGen(options =>
 // Add application and infrastructure layers
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddWolverineIntegration();
+
+// Add custom health checks
+builder.Services.AddCustomHealthChecks(builder.Configuration);
 
 // Configure Wolverine
 builder.Host.UseWolverine(opts =>
 {
     // Enable HTTP endpoints
-    opts.Discovery.IncludeType<Program>();
+    opts.Discovery.IncludeAssembly(typeof(Program).Assembly);
     
     // Use FluentValidation for message validation
     opts.UseFluentValidation();
@@ -78,7 +84,7 @@ app.UseAuthorization();
 app.MapWolverineEndpoints();
 
 // Add health checks
-app.MapHealthChecks("/health");
+app.MapCustomHealthChecks();
 
 app.Run();
 
