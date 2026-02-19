@@ -16,8 +16,10 @@ services:
       - ConnectionStrings__Database=Server=sqlserver;Database=AuditLog;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;
       - Serilog__WriteTo__1__Args__serverUrl=http://seq:5341
     depends_on:
-      - sqlserver
-      - seq
+      sqlserver:
+        condition: service_healthy
+      seq:
+        condition: service_started
     networks:
       - wolverine-network
     healthcheck:
@@ -42,7 +44,7 @@ services:
     networks:
       - wolverine-network
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong@Passw0rd -Q 'SELECT 1' || exit 1"]
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong@Passw0rd -Q "SELECT 1" || exit 1
       interval: 10s
       timeout: 3s
       retries: 10
