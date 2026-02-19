@@ -1,0 +1,20 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>f89f39b0-86a0-4052-82fb-16c79c7f2ac4</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="13.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\E470.AuditLog.Consumer\E470.AuditLog.Consumer.csproj" />
+    <ProjectReference Include="..\E470.AuditLog.Produser\E470.AuditLog.Produser.csproj" />
+  </ItemGroup>
+
+</Project>
