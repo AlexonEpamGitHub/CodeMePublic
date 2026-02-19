@@ -9,6 +9,7 @@ using Web.Api.Wolverine.Middleware;
 using Wolverine;
 using Wolverine.FluentValidation;
 using Wolverine.Http;
+using Wolverine.SqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,15 +46,27 @@ builder.Host.UseWolverine(opts =>
     // Use FluentValidation for message validation
     opts.UseFluentValidation();
     
+    // Configure SQL Server persistence for transactional inbox and outbox
+    opts.PersistMessagesWithSqlServer(builder.Configuration.GetConnectionString("WolverineDatabase"));
+    
+    // Configure EF Core integration for transactional outbox
+    opts.UseEntityFrameworkCoreTransactions();
+    
+    // Configure durability settings
+    opts.Durability.DurabilityAgentEnabled = true;
+    opts.Durability.ScheduledJobPollingTime = TimeSpan.FromSeconds(5);
+    opts.Durability.ScheduledJobFirstExecution = TimeSpan.FromSeconds(0);
+    
     // Configure local queue for async processing
     opts.LocalQueue("default")
         .Sequential();
     
+    // Configure durable local queue for important messages
+    opts.LocalQueue("important")
+        .UseDurableInbox();
+    
     // Optimize for local development
     opts.OptimizeArtifactWorkflow(TypeLoadMode.Auto);
-    
-    // Configure EF Core integration for transactional outbox
-    opts.UseEntityFrameworkCoreTransactions();
     
     // Configure custom exception policies
     opts.ConfigureExceptionPolicies();
@@ -85,6 +98,16 @@ app.MapWolverineEndpoints();
 
 // Add health checks
 app.MapCustomHealthChecks();
+
+// Ensure Wolverine SQL Server schema is created
+using (var scope = app.Services.CreateScope())
+{
+    var store = scope.ServiceProvider.GetRequiredService<Wolverine.Persistence.Durability.IMessageStore>();
+    if (store is Wolverine.SqlServer.SqlServerMessageStore sqlServerStore)
+    {
+        await sqlServerStore.Admin.MigrateAsync();
+    }
+}
 
 app.Run();
 
