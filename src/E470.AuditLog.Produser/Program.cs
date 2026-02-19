@@ -1,3 +1,4 @@
+using E470.AuditLog.Contracts.Messages;
 using E470.AuditLog.Produser.Data;
 using Microsoft.EntityFrameworkCore;
 using Wolverine;
@@ -12,21 +13,20 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.AddServiceDefaults();
+        
+        // Get connection string - matches AppHost database configuration
         var connectionString = builder.Configuration.GetConnectionString("message-bus-mssql")!;
 
-        // Add DbContext registration
+        // Register Entity Framework Core DbContext
         builder.Services.AddDbContext<AuditLogDbContext>(options =>
             options.UseSqlServer(connectionString));
 
-        // Add services to the container.
+        // Configure Wolverine with SQL Server transport
         builder.Host.UseWolverine(opts =>
         {
-            // Setting up Sql Server-backed message storage
+            // Setting up SQL Server-backed message storage for transactional outbox
             // This requires a reference to Wolverine.SqlServer
             opts.PersistMessagesWithSqlServer(connectionString, "wolverine");
-
-            // Configure SQL Server transport for transactional inbox/outbox
-            opts.UseSqlServerPersistenceAndTransport(connectionString, "wolverine");
 
             // Set up Entity Framework Core as the support
             // for Wolverine's transactional middleware
@@ -35,13 +35,13 @@ public class Program
             // Enrolling all local queues into the
             // durable inbox/outbox processing
             opts.Policies.UseDurableLocalQueues();
+            
+            // Enable durable outbox pattern for reliable message publishing
+            opts.Policies.UseDurableOutbox();
 
-            // Add durable inbox and outbox policies
-            opts.Policies.UseDurableInboxOnAllListeners();
-            opts.Policies.UseDurableOutboxOnAllSendingEndpoints();
-
-            // Configure message publishing to local queues
-            opts.PublishAllMessages().ToLocalQueue("audit-log-queue");
+            // Configure message routing - publish to local queue for Consumer
+            opts.PublishMessage<AuditLogCreated>()
+                .ToLocalQueue("auditlog");
         });
 
         builder.Services.AddControllers();
@@ -61,7 +61,6 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
 
         app.MapControllers();
 
