@@ -6,6 +6,7 @@ using Serilog;
 using Wolverine;
 using Wolverine.FluentValidation;
 using Wolverine.Http;
+using Web.Api.Wolverine.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,9 @@ builder.Host.UseWolverine(opts =>
     
     // Configure EF Core integration for transactional outbox
     opts.UseEntityFrameworkCoreTransactions();
+    
+    // Configure custom exception policies
+    opts.ConfigureExceptionPolicies();
 });
 
 var app = builder.Build();
