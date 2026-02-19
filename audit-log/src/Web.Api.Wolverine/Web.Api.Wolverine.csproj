@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,6 +23,7 @@
     <PackageReference Include="WolverineFx.Http" Version="4.4.0" />
     <PackageReference Include="Wolverine.FluentValidation" Version="4.4.0" />
     <PackageReference Include="WolverineFx.EntityFrameworkCore" Version="4.4.0" />
+    <PackageReference Include="WolverineFx.SqlServer" />
   </ItemGroup>
 
   <ItemGroup>
