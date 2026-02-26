@@ -2,7 +2,7 @@ using E470.AuditLog.Consumer.Data;
 using E470.AuditLog.Contracts.Messages;
 using E470.AuditLog.Contracts.Models;
 using Microsoft.EntityFrameworkCore;
-using Wolverine;
+using Wolverine.Attributes;
 
 namespace E470.AuditLog.Consumer.Handlers;
 

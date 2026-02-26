@@ -37,7 +37,7 @@ public class Program
             opts.Policies.UseDurableLocalQueues();
             
             // Enable durable outbox pattern for reliable message publishing
-            opts.Policies.UseDurableOutbox();
+            opts.Policies.UseDurableOutboxOnAllSendingEndpoints();
 
             // Configure message routing - publish to local queue for Consumer
             opts.PublishMessage<AuditLogCreated>()

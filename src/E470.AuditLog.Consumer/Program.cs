@@ -36,10 +36,10 @@ public class Program
             opts.Policies.UseDurableLocalQueues();
             
             // Enable durable inbox pattern for reliable message consumption
-            opts.Policies.UseDurableInbox();
+            opts.Policies.UseDurableInboxOnAllListeners();
 
             // Listen to the local queue for incoming messages
-            opts.ListenToLocalQueue("auditlog")
+            opts.LocalQueue("auditlog")
                 .MaximumParallelMessages(10);
 
             // Auto-discover message handlers in this assembly

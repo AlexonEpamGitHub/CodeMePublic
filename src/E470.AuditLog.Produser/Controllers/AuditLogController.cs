@@ -2,6 +2,7 @@ using E470.AuditLog.Contracts.Messages;
 using E470.AuditLog.Contracts.Models;
 using E470.AuditLog.Produser.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Wolverine;
 
 namespace E470.AuditLog.Produser.Controllers;
