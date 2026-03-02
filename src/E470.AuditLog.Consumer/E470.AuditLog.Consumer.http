@@ -1,6 +1,0 @@
-@E470.AuditLog.Consumer_HostAddress = http://localhost:5195
-
-GET {{E470.AuditLog.Consumer_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

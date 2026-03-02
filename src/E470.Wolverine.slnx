@@ -1,8 +1,0 @@
-<Solution>
-  <Project Path="E470.AuditLog.Consumer/E470.AuditLog.Consumer.csproj" />
-  <Project Path="E470.AuditLog.Contracts/E470.AuditLog.Contracts.csproj" />
-  <Project Path="E470.AuditLog.ContractsTests/E470.AuditLog.ContractsTests.csproj" Id="ccbb691f-05e5-4927-a4c6-6bc9dd307cc4" />
-  <Project Path="E470.AuditLog.Produser.AppHost/E470.AuditLog.Produser.AppHost.csproj" />
-  <Project Path="E470.AuditLog.Produser.ServiceDefaults/E470.AuditLog.Produser.ServiceDefaults.csproj" />
-  <Project Path="E470.AuditLog.Produser/E470.AuditLog.Produser.csproj" />
-</Solution>
